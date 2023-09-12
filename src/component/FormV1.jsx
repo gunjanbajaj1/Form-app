@@ -1,12 +1,29 @@
 import { useState } from "react";
+import "./FormV1.css";
+
+
 const FormV1 = () => {
   const [profile, setProfile] = useState({
     gender: "",
-    Height: "",
+    Heightft: "",
+    Heightin: "",
     Weight: "",
     Activity: "",
     Diabetes: "",
+    Pregancy:"",
   });
+
+  const [ history,setHistory ] = useState([]);
+
+  const handleCheck = (e) => {
+    var updatedList = [...history];
+    if (e.target.value) {
+      updatedList = [...history, event.target.value];
+    } else {
+      updatedList.splice(history.indexOf(event.target.value), 1);
+    }
+    setHistory(updatedList);
+  };
 
   const onInputChange = (e) => {
     //console.log("e:", e);
@@ -24,14 +41,20 @@ const FormV1 = () => {
     //setProfile((abTakKiState) => ({ ...abTakKiState, [name]: value }));
   };
 
+  const callSubmit =(e) => {
+
+      console.log(profile);
+      console.log(history);
+
+  }
+
   return (
-    <div>
+    <div id="root">
       <div className="form-element">
         <p>Gender </p>
-        <input
+          <input
           type="radio"
           name="gender"
-          placeholder="Enter name"
           value="Male"
           //value={profile.name}
           //onChange={onInputChange}
@@ -51,11 +74,11 @@ const FormV1 = () => {
       </div>
       <div className="form-element">
         <p>Height and Weight</p>
-        <input type="text" name="ft"/><label htmlFor="">ft.</label> <input type="text" name="in"/><label htmlFor="in">in.</label> <input type="text" name="kg"/><label htmlFor="">kg.</label>
+        <input type="text" name="Heightft" value={profile.Heightft} onChange={(e) => onInputChange(e)}/><label htmlFor="">ft.</label> <input type="text" name="Heightin" value={profile.Heightin} onChange={(e) => onInputChange(e)}/><label htmlFor="in">in.</label> <input type="text" name="Weight" value={profile.Weight} onChange={(e) => onInputChange(e)}/><label htmlFor="">kg.</label>
       </div>
       <div className="form-element">
         <p>Family History</p>
-        <input type="checkbox" name="history"/><label htmlFor="">Parents</label> <input type="checkbox" name="ihistoryn"/><label htmlFor="in">Siblings</label>
+        <input type="checkbox" name="history" value="Parents" Change={(e) => handleCheck(e)}/><label htmlFor="">Parents</label> <input type="checkbox" onChange={(e) => handleCheck(e)} name="history" value="Siblings"/><label htmlFor="in">Siblings</label>
       </div>
       <div className="form-element">
         <p>Activity Level </p>
@@ -112,6 +135,34 @@ const FormV1 = () => {
           onChange={(e) => onInputChange(e)}
         />
         <label for="html">Neither</label>
+      </div>
+      <div className="form-element">
+        <p>Pregancy </p>
+        <input
+          type="radio"
+          name="Pregancy"
+          //placeholder="Enter name"
+          value="Pregnant"
+          //value={profile.name}
+          //onChange={onInputChange}
+          onChange={(e) => onInputChange(e)}
+        />
+        <label for="html">Pregnant</label>
+         <input
+          type="radio"
+          name="Pregancy"
+          //placeholder="Enter name"
+          value="Not Pregnant"
+         // value={profile.name}
+          //onChange={onInputChange}
+          onChange={(e) => onInputChange(e)}
+        />
+        <label for="html">Not Pregnant</label>
+      </div><br />
+      <div>
+        <input type="submit" 
+        onClick={callSubmit}
+        />
       </div>
 
     </div>

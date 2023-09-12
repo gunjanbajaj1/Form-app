@@ -1,0 +1,11 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#root{
+    display: flex;
+    font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+    flex-direction: column;
+   
+}
