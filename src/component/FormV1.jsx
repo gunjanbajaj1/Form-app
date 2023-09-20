@@ -13,16 +13,19 @@ const FormV1 = () => {
     Pregancy:"",
   });
 
-  const [ history,setHistory ] = useState([]);
+  const [history, setHistory] = useState({
+    Parents: false,
+    Siblings: false,
+  });
 
   const handleCheck = (e) => {
-    var updatedList = [...history];
-    if (e.target.value) {
-      updatedList = [...history, event.target.value];
-    } else {
-      updatedList.splice(history.indexOf(event.target.value), 1);
-    }
-    setHistory(updatedList);
+    const { checked, name } = e.target;
+
+    // Way 1
+    setHistory({ ...history, [name]: checked });
+
+    // way 2
+    //setHistory((prevState) => ({ ...prevState, [name]: checked }));
   };
 
   const onInputChange = (e) => {
@@ -78,7 +81,7 @@ const FormV1 = () => {
       </div>
       <div className="form-element">
         <p>Family History</p>
-        <input type="checkbox" name="history" value="Parents" Change={(e) => handleCheck(e)}/><label htmlFor="">Parents</label> <input type="checkbox" onChange={(e) => handleCheck(e)} name="history" value="Siblings"/><label htmlFor="in">Siblings</label>
+        <input type="checkbox" name="Parents" checked={history.Parents} Change={(e) => handleCheck(e)}/><label htmlFor="">Parents</label> <input type="checkbox" onChange={(e) => handleCheck(e)} name="Siblings"  checked={history.Siblings}/><label htmlFor="in">Siblings</label>
       </div>
       <div className="form-element">
         <p>Activity Level </p>

@@ -23,9 +23,9 @@
   "include": [
     "src"
   ],
-  "references": [
-    {
+  //"references": [
+   // {
       "path": "./tsconfig.node.json"
-    }
-  ]
+//}
+  //]
 }
